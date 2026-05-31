@@ -1,0 +1,114 @@
+*{
+    margin: 0px;
+    padding: 0px; 
+    box-sizing: border-box;
+    background-color: #181818;
+}
+
+.wrapper{
+
+    background-color: #181818;
+    width: 100%;
+    height: 100%;
+    padding-bottom: 4rem;
+
+}
+.noResText{
+
+    display: block ;
+    color: #E5E7EB;
+    font-size: 4rem;
+    padding-top: 10%;
+    padding-left: 27%;
+    
+    
+}
+
+#heading{
+
+    padding-left: 4%;
+    padding-top: 3%;
+    font-size: 3rem;
+    color: #F5C77A;
+    text-decoration:solid;
+
+}
+.resultsMovieCards{
+
+    display: grid;
+    height: 100%;
+    width: 90%;
+    padding-top: 8%;
+    gap: 1.5rem;
+    margin: 0 auto;
+    grid-template-columns: 27% 27% 27% 27%;
+
+
+    grid-auto-rows: minmax(220px, 1fr);
+
+    position: relative;
+    padding-right: 2rem;
+}
+
+.box{
+
+    background-color: #181818;
+    width: 15rem;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    position: relative;
+    transition: transform 0.5s ease, box-shadow 1s ease;
+
+    
+    
+    object-fit: cover;
+}
+
+.box:hover{
+    transform: scale(1.07);
+    box-shadow: 0 0 8px 4px  rgba(245, 199, 122, 0.6),
+0 0 16px rgba(245, 199, 122, 0.35);
+
+}
+.movie-info{
+    position: absolute;
+    
+}
+
+img{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+
+/* //meadia querries so that it looks good on smaller screens also  */
+@media (max-width: 600px) {
+    
+    .resultsMovieCards{
+        display: grid;
+        height: 100%;
+        width: 90%;
+        padding-top: 8%;
+        gap: 1.5rem;
+        margin: 0 auto;
+        grid-template-columns: 70%;
+        grid-auto-rows: repeat(auto-fit, minmax(220px, 1fr));
+
+    }
+}
+
+@media(min-width: 600px) and (max-width:900px){
+
+        .resultsMovieCards{
+        display: grid;
+        height: 100%;
+        width: 90%;
+        padding-top: 8%;
+        gap: 1.5rem;
+        margin: 0 auto;
+        grid-template-columns: 35% 35%;
+        grid-auto-rows: repeat(auto-fit, minmax(220px, 1fr));
+
+    }
+
+}
