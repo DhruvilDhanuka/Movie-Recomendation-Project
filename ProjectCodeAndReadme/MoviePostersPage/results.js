@@ -9,55 +9,6 @@ header.innerText = `Showing results for: ${query}`;
 
 let normalizedQuery = query.toLowerCase().trim();
 
-async function getGeminiResponse(normalizedQuery) {
-  let API_KEY = process.env.GEMINI_API_KEY;
-
-  let prompt = `Now I am making movie search recomendation tool, Now I am going to 
-        give you what user typed into the searchField you identify if it is a actor/actoress name 
-        or a search with a mood or just a plain movie/series title 
-        if it is a movie/series title only and only return only a string "False" 
-        if the user types gibberish or some garbage just return only and only the same string "False"
-        otherwise give me a list of the movie titles by those actors/actresses or on the basis of the mood that user types
-        return ONLY a valid JSON array of movie titles. 
-        ALSO DO NOT PUT ANY MARKDOWNS AUR BREAKLINE THINGS JUST GIVE ONLY AND ONLY A CLEARN JSON ARRAY  Do Not explain anything. now the user Query is 
-        ${normalizedQuery}`;
-
-  //api call to gemini to check if the user entered name of actor/actress ,mood or a plain movie title..
-  let response = await fetch(
-    "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent",
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "x-goog-api-key": API_KEY,
-      },
-      body: JSON.stringify({
-        contents: [
-          {
-            parts: [{ text: prompt }],
-          },
-        ],
-      }),
-    },
-  );
-
-  //fetching response for data
-  let data = await response.json();
-
-  console.log("full gemini response: ", data);
-
-  var geminiText = data.candidates[0].content.parts[0].text;
-
-  console.log("geminiText: ", geminiText);
-
-  //here returning the text or array obtained from gemini to the search Handler function
-  if (geminiText != "False") {
-    return JSON.parse(geminiText);
-  } else {
-    return geminiText;
-  }
-}
-
 let resultMovies = document.getElementById("results-grid");
 
 //this basically injects the movie cards in our grid that we created in results.html  and resultsStyling.css
@@ -120,6 +71,16 @@ async function dataRequest(geminiResult) {
       createMovieCard(data);
     }
   }
+}
+async function getGeminiResponse(normalizedQuery) {
+  const response = await fetch("/api/gemini", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ query: normalizedQuery }),
+  });
+
+  const data = await response.json();
+  return data.result;
 }
 
 async function main() {
