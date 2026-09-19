@@ -1,0 +1,15 @@
+{
+  "name": "projectcodeandreadme",
+  "version": "1.0.0",
+  "description": "This file contains info about how every thing works and how can you run the file in your editor",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@vercel/analytics": "^2.0.1"
+  }
+}
