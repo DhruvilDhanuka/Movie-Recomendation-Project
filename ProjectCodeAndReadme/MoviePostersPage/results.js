@@ -80,6 +80,7 @@ async function getGeminiResponse(normalizedQuery) {
   });
 
   const data = await response.json();
+
   return data.result;
 }
 
